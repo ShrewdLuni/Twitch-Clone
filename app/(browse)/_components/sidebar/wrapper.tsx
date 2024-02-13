@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 
 import { ToggleSkeleton } from "./toggle";
 import { RecommendedSkeleton } from "./recommended";
+import { FollowingSkeleton } from "./following";
 
 interface WrapperProps {
   children: React.ReactNode;
@@ -24,12 +25,11 @@ export const Wrapper = ({
     setIsClient(true);
   }, [])
 
-  
-
   return !isClient 
   ? (
-    <aside className={cn("left-0 fixed flex flex-col w-60 h-full bg-background border-r z-50", collapsed && "w-[70px]")}>
+    <aside className={cn("left-0 fixed flex flex-col h-full bg-background border-r z-50", collapsed ? "w-[70px]" : "w-60")}>
       <ToggleSkeleton/>
+      <FollowingSkeleton/>
       <RecommendedSkeleton/>
     </aside>
   ) 
