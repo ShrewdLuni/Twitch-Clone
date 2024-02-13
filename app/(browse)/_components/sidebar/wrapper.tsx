@@ -34,7 +34,7 @@ export const Wrapper = ({
     </aside>
   ) 
   : ( 
-    <aside className={cn("left-0 fixed flex flex-col w-60 h-full bg-background border-r z-50", collapsed && "w-[70px]")}>
+    <aside className={cn("left-0 fixed flex flex-col w-[70px] h-full bg-background border-r z-50", !collapsed && "w-60")}>
       {children}
     </aside>
   );
