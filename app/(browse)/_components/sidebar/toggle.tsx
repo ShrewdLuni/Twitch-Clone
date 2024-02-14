@@ -19,7 +19,8 @@ export const Toggle = () => {
 
   return (
     <>
-      {collapsed && (
+      {collapsed 
+      ? (
         <div className="hidden lg:flex w-full items-center justify-center pt-4 mb-4">
           <Hint label={label} side="right" asChild>
             <Button className="h-auto p-2" variant="ghost" onClick={onExpand}>
@@ -27,8 +28,8 @@ export const Toggle = () => {
             </Button>
           </Hint>
         </div>
-      )}
-      {!collapsed && (
+      )
+      : (
         <div className="p-3 pl-6 mb-2 flex items-center w-full">
           <p className="font-semibold text-primary">
             For you
