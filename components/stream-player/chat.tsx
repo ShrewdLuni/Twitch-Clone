@@ -9,6 +9,7 @@ import { useEffect, useMemo, useState } from "react";
 import { ChatHeader } from "./chat-header";
 import { ChatForm } from "./chat-form";
 import { ChatList } from "./chat-list";
+import { ChatCommunity } from "./chat-comunity";
 
 
 interface ChatProps {
@@ -66,16 +67,15 @@ export const Chat = ({
   return (
     <div className="flex flex-col bg-background border-l border-b pt-0 h-[calc(100vh-80px)]">
       <ChatHeader/>
-      {variant === ChatVariant.CHAT 
-      ? (
+      {variant === ChatVariant.CHAT && (
         <>
           <ChatList messages={reversedMessages} isHidden={isHidden}/>
           <ChatForm onSubmit={onSubmit} value={value} onChange={onChnage} isHidden={isHidden} isFollowersOnly={isChatFollowersOnly} isDelayed={isChatDelayed} isFollowing={isFollowing}/>
         </> 
-      )
-      : (
+      )}
+      {variant === ChatVariant.COMMUNITY && (
         <>
-
+          <ChatCommunity viewerName={viewerName} hostName={hostName} isHidden={isHidden}/>
         </> 
       )}
     </div>
