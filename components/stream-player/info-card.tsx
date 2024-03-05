@@ -1,8 +1,10 @@
 "use client";
 
+import Image from "next/image";
+
+import { InfoModal } from "./info-modal";
 import { Pencil } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
-import Image from "next/image";
 
 interface InfoCardProps {
   name: string;
@@ -21,7 +23,7 @@ export const InfoCard = ({name,thumbnailUrl,hostIdentity,viewerIdentity}:InfoCar
     <div className="px-4">
       <div className="rounded-xl bg-background">
         <div className="flex items-center gap-x-2.5 p-4">
-         <div className="rounded-md bg-blue-600 p-2 h-auto w-auto">
+         <div className="rounded-md bg-rose-600 p-2 h-auto w-auto">
            <Pencil/>   
          </div>
          <div>
@@ -32,6 +34,7 @@ export const InfoCard = ({name,thumbnailUrl,hostIdentity,viewerIdentity}:InfoCar
             Maximize your visibility
           </p>
          </div>
+         <InfoModal initialName={name} initialThumbnailUrl={thumbnailUrl}/>
         </div>
         <Separator/>
         <div className="p-4 lg:p-6 space-y-4">
