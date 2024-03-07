@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 
-import { useState, useTransition } from "react";
+import { ElementRef, useRef, useState, useTransition } from "react";
 import { updateStream } from "@/actions/stream";
 import { toast } from "sonner";
 
@@ -23,6 +23,7 @@ interface InfoModalProps{
 }
 
 export const InfoModal = ({initialName,initialThumbnailUrl} : InfoModalProps) => {
+  const closeRef = useRef<ElementRef<"button">>(null);
   const [isPending, startTransition] = useTransition();
   const [name, setName] =useState(initialName);
   
@@ -31,7 +32,10 @@ export const InfoModal = ({initialName,initialThumbnailUrl} : InfoModalProps) =>
 
     startTransition(() => {
       updateStream({name: name})
-      .then(() => toast.success("Stream updated"))
+      .then(() => {
+        toast.success("Stream updated")
+        closeRef?.current?.click();
+      })
       .catch(() => toast.error("Something went wrong"))
     })
   };
@@ -61,7 +65,7 @@ export const InfoModal = ({initialName,initialThumbnailUrl} : InfoModalProps) =>
             <Input placeholder="Stream name" onChange={onChange} value={name} disabled={isPending}/>
           </div>
           <div className="flex justify-between">
-            <DialogClose asChild>
+            <DialogClose asChild ref={closeRef}>
               <Button type="button" variant="ghost">
                 Cancel
               </Button>
