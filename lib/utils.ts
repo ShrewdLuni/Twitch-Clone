@@ -13,7 +13,8 @@ export const stringToColor = (str: string) => {
   let color = "#";
   for(let i = 0; i< 3; i++){
     const value = (hash >> (i * 8)) & 0xFF;
-    color += ("00" + value.toString(16)).substring(-2);
+    color += (("00" + value.toString(16)).slice(-2));
   }
+  
   return color;
 };

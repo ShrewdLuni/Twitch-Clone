@@ -50,6 +50,5 @@ export const Actions = ({isFollowing, userId,}: ActionsProps) => {
 			{"Block"}
 		</Button>
 		</>
-
 	);
 };
