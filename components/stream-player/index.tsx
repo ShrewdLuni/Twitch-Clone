@@ -12,7 +12,7 @@ import { Chat, ChatSkeleton } from "./chat";
 import { ChatToggle } from "./chat-toggle";
 import { Header, HeaderSkeleton } from "./header";
 import { InfoCard } from "./info-card";
-import { AboutCard } from "./about-cart";
+import { AboutCard } from "./about-card";
 
 interface StreamPlayerProps {
 	user : User & { stream : Stream | null, _count: {followedBy : number}};
