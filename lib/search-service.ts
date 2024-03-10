@@ -4,7 +4,7 @@ import { getSelf } from "@/lib/auth-service";
 export const getSearch = async (term?: string) => {
   let userId;
 
-  try{
+  try {
     const self = await getSelf();
     userId = self.id;
   } catch {
@@ -13,10 +13,10 @@ export const getSearch = async (term?: string) => {
 
   let streams = [];
 
-  if(userId){
+  if (userId) {
     streams = await db.stream.findMany({
       where: {
-        user:{
+        user: {
           NOT: {
             blocking: {
               some: {
@@ -36,12 +36,17 @@ export const getSearch = async (term?: string) => {
               username: {
                 contains: term,
               },
-            },
+            }
           },
         ],
       },
-      include: {
+      select: {
         user: true,
+        id: true,
+        name: true,
+        isLive: true,
+        thumbnailUrl: true,
+        updatedAt: true,
       },
       orderBy: [
         {
@@ -52,7 +57,7 @@ export const getSearch = async (term?: string) => {
         },
       ],
     });
-  } else{
+  } else {
     streams = await db.stream.findMany({
       where: {
         OR: [
@@ -66,12 +71,17 @@ export const getSearch = async (term?: string) => {
               username: {
                 contains: term,
               },
-            },
+            }
           },
         ],
       },
-      include: {
+      select: {
         user: true,
+        id: true,
+        name: true,
+        isLive: true,
+        thumbnailUrl: true,
+        updatedAt: true,
       },
       orderBy: [
         {
