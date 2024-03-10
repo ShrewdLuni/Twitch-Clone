@@ -8,7 +8,12 @@ import { UserAvatar, UserAvatarSkeleton } from "@/components/user-avatar";
 import { Skeleton } from "@/components/ui/skeleton";
 
 interface ResultCardProps {
-  data: Stream & { user: User };
+  data: {
+    user: User;
+    isLive: boolean;
+    name: string;
+    thumbnailUrl: string | null;
+  };
 };
 
 export const ResultCard = ({data} : ResultCardProps) => {

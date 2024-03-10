@@ -7,15 +7,15 @@ export const getStreams = async () => {
   try {
     const self = await getSelf();
     userId = self.id;
-  } catch (error) {
+  } catch {
     userId = null;
   }
 
   let streams = [];
 
-  if(userId){
+  if (userId) {
     streams = await db.stream.findMany({
-      where:{
+      where: {
         user: {
           NOT: {
             blocking: {
@@ -26,26 +26,34 @@ export const getStreams = async () => {
           }
         }
       },
-      include: {
+      select: {
+        id: true,
         user: true,
+        isLive: true,
+        name: true,
+        thumbnailUrl: true,
       },
       orderBy: [
         {
-        isLive: "desc",
+          isLive: "desc",
         },
         {
           updatedAt: "desc",
         }
-      ]
+      ],
     });
   } else {
     streams = await db.stream.findMany({
-      include: {
+      select: {
+        id: true,
         user: true,
+        isLive: true,
+        name: true,
+        thumbnailUrl: true,
       },
       orderBy: [
         {
-        isLive: "desc",
+          isLive: "desc",
         },
         {
           updatedAt: "desc",
@@ -55,4 +63,4 @@ export const getStreams = async () => {
   }
 
   return streams;
-}
+};
